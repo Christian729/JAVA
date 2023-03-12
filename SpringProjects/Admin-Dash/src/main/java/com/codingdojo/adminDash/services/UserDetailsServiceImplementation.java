@@ -6,17 +6,19 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.codingdojo.adminDash.models.Role;
 import com.codingdojo.adminDash.models.User;
 import com.codingdojo.adminDash.repositories.UserRepository;
-
-public class UserDetailsServiceImplementation {
+@Service
+public class UserDetailsServiceImplementation implements UserDetailsService{
 	private UserRepository userRepository;
     
-    public UserDetailsServiceImplementation(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public UserDetailsServiceImplementation(UserRepository userRepository){ // so here were going to initialize the class
+        this.userRepository = userRepository;// and set it
     }
     // 1
     @Override
