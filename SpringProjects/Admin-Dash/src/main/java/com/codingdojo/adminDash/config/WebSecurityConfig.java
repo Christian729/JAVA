@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class WebSecurityConfig {
-private UserDetailsService userDetailsService;
+private UserDetailsService userDetailsService;//assure the UserDetailsService is connected
 	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -34,7 +34,8 @@ private UserDetailsService userDetailsService;
 		
 		return http.build();
 	}
-	
+	// configureGlobal-- This method is configuring Spring Security to use our custom implementation of the 
+	// UserDetailsService with Bcrypt
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     } 
