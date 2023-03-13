@@ -1,5 +1,7 @@
 package com.codingdojo.adminDash.controllers;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -38,5 +40,13 @@ public class Users {
     @RequestMapping("/login")
     public String login() {
         return "login.jsp";
+    }
+    
+    @RequestMapping(value = {"/", "/home"})
+    public String home(Principal principal, Model model) {
+        // 1
+        String username = principal.getName();
+        model.addAttribute("currentUser", userService.findByUsername(username));
+        return "homePage.jsp";
     }
 }
