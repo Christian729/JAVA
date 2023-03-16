@@ -12,6 +12,7 @@
         <p>
             <label for="username">Username</label>
             <input type="text" id="username" name="username"/>
+            <!--  It is important to note that the form must have a name field with the username value for Spring Security to correctly grab the information in the loadUserByUsername(String) method. -->
         </p>
         <p>
             <label for="password">Password</label>
@@ -20,5 +21,7 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Login!"/>
     </form>
+    
+    <!-- spring security handles our post request automatically, so we dont need to put one into our controller  -->
 </body>
 </html>

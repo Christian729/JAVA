@@ -23,6 +23,9 @@ public class Users {
 	        this.userService = userService;
 	    }
 	
+	    
+	    // spring security handles our post request automatically, so we dont need to put one into our controller  
+	    
 	@RequestMapping("/registration")
     public String registerForm(@Valid @ModelAttribute("user") User user) {
         return "registrationPage.jsp";
@@ -43,10 +46,14 @@ public class Users {
     }
     
     @RequestMapping(value = {"/", "/home"})
-    public String home(Principal principal, Model model) {
+    public String home(Principal principal, Model model) { // principal represents the current user logged in
         // 1
+    	//Our home method accepts GET requests for "/" and "/home" urls. After a successful authentication, we are able to get 
+    	//the name of our principal (current user) via the .getName() method. This process of getting the current user has been
+    	// available since Spring 3+.
         String username = principal.getName();
-        model.addAttribute("currentUser", userService.findByUsername(username));
+        model.addAttribute("currentUser", userService.findByUsername(username)); // on a successful login, spring security
+        // will automatically call the loadUserByUsername(String) in the UserDetailsServiceImplementation class
         return "homePage.jsp";
     }
 }
