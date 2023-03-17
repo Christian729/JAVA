@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.adminDash.models.User;
 import com.codingdojo.adminDash.services.UserService;
@@ -41,7 +42,15 @@ public class Users {
     }
     
     @RequestMapping("/login")
-    public String login() {
+    public String login(@RequestParam(value="error", required=false) String error, @RequestParam(value="logout", required=false) String logout, Model model) {
+        if(error != null) {    // if you have an error from logging in
+            model.addAttribute("errorMessage", "Invalid Credentials, Please try again."); // flash an error message
+        }
+        // if we dont do this, well just end up at an empty login page
+        
+        if(logout != null) { //if you have logged out successfully 
+            model.addAttribute("logoutMessage", "Logout Successful!"); // flash a successful message!
+        }
         return "login.jsp";
     }
     
