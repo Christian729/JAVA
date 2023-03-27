@@ -15,13 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.codingdojo.adminDash.models.User;
 import com.codingdojo.adminDash.services.UserService;
+import com.codingdojo.adminDash.validator.UserValidator;
 
 @Controller
 public class Users {
 	 private UserService userService;
 	    
-	    public Users(UserService userService) {
+	// NEW
+	    private UserValidator userValidator;
+	    
+	    // NEW
+	    public Users(UserService userService, UserValidator userValidator) {
 	        this.userService = userService;
+	        this.userValidator = userValidator;
 	    }
 	
 	    
@@ -34,6 +40,9 @@ public class Users {
 	
 	@PostMapping("/registration")
     public String registration(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, HttpSession session) {
+        
+		// NEW
+        userValidator.validate(user, result);
         if (result.hasErrors()) {
             return "registrationPage.jsp";
         }

@@ -16,6 +16,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 
 // imports removed for brevity
 @Entity
@@ -25,7 +26,13 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    // NEW -- regarding validations!!
+    @Size(min=3, message="Username must be greater than 3 characters")
     private String username;
+    
+    // NEW -- regarding validations through persistence!!
+    
+    @Size(min=5, message="Password must be greater than 5 characters")
     private String password;
     @Transient
     private String passwordConfirmation;
