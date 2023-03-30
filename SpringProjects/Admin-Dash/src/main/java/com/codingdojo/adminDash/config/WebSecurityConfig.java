@@ -23,6 +23,7 @@ private UserDetailsService userDetailsService;//assure the UserDetailsService is
 		http.
 	        authorizeRequests()
 	            .antMatchers("/css/**", "/js/**", "/registration").permitAll()
+	            .antMatchers("/admin/**").access("hasRole('ADMIN')")    // NEW
 	            .anyRequest().authenticated()
 	            .and()
 	        .formLogin()

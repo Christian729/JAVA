@@ -26,13 +26,12 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    // NEW -- regarding validations!!
-    @Size(min=3, message="Username must be greater than 3 characters")
+    
+    @Size(min=3)
     private String username;
     
     // NEW -- regarding validations through persistence!!
-    
-    @Size(min=5, message="Password must be greater than 5 characters")
+    @Size(min=5)
     private String password;
     @Transient
     private String passwordConfirmation;
