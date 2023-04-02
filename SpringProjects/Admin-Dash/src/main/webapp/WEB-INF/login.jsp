@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login Page</title>
 </head>
+
 <body>
 <!-- in the event we are logging out, flash the logout message  -->
 	 <c:if test="${logoutMessage != null}">
@@ -30,6 +31,27 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="submit" value="Login!"/>
     </form>
+    <hr>
+    
+    <h1>Register!</h1>
+    
+    <p><form:errors path="user.*"/></p>
+    
+    <form:form method="POST" action="/registration" modelAttribute="user">
+        <p>
+            <form:label path="username">Username:</form:label>
+            <form:input path="username"/>
+        </p>
+        <p>
+            <form:label path="password">Password:</form:label>
+            <form:password path="password"/>
+        </p>
+        <p>
+            <form:label path="passwordConfirmation">Password Confirmation:</form:label>
+            <form:password path="passwordConfirmation"/>
+        </p>
+        <input type="submit" value="Register!"/>
+    </form:form
     
     <!-- spring security handles our post request automatically, so we dont need to put one into our controller  -->
 </body>

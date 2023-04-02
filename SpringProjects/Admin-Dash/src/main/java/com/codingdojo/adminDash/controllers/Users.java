@@ -46,7 +46,7 @@ public class Users {
         if (result.hasErrors()) {
             return "registrationPage.jsp";
         }
-        userService.saveWithUserRole(user);
+        userService.saveUserWithAdminRole(user); // it seems for every user we create, we will grant them admin status
         return "redirect:/login";
     }
     
