@@ -35,7 +35,7 @@ public class Users {
 	    
 	@RequestMapping("/registration")
     public String registerForm(@Valid @ModelAttribute("user") User user) {
-        return "registrationPage.jsp";
+        return "login.jsp";// changing the page redirection
     }
 	
 	@PostMapping("/registration")
@@ -44,7 +44,7 @@ public class Users {
 		// NEW
         userValidator.validate(user, result);
         if (result.hasErrors()) {
-            return "registrationPage.jsp";
+            return "login.jsp"; // changing the page redirection
         }
         userService.saveUserWithAdminRole(user); // it seems for every user we create, we will grant them admin status
         return "redirect:/login";
